@@ -31,9 +31,9 @@ if [ "${PREFIX}" = "0" ]; then
   PREFIX=""
 fi
 
-# AW: Build up NEXT_RELEASE from new input for optional prefix
-NEXT_RELEASE_DATE=$(date "+${DATE_FORMAT}")
-NEXT_RELEASE="${PREFIX}${NEXT_RELEASE_DATE}"
+# AW: Build up NEXT_RELEASE_NAME from new input for optional prefix
+NEXT_RELEASE_VERSION=$(date "+${DATE_FORMAT}")
+NEXT_RELEASE="${PREFIX}${NEXT_RELEASE_VERSION}"
 NEXT_RELEASE_NAME="${NAME} ${NEXT_RELEASE}"
 
 # ColemanB - Script looks for tags meeting requirements
@@ -82,4 +82,4 @@ if [ "${CREATE_RELEASE}" = "true" ] || [ "${CREATE_RELEASE}" = true ]; then
   echo "${OUTPUT}" | jq
 fi
 
-echo "release=${NEXT_RELEASE}" >>$GITHUB_OUTPUT
+echo "release=${NEXT_RELEASE_VERSION}" >>$GITHUB_OUTPUT
