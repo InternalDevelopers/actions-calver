@@ -1,6 +1,6 @@
 name: 'Calver Release'
 description: 'Automatically create Calver compliant tags or releases based on PR labels'
-author: 'Stéphane Bour'
+author: 'Stéphane Bour. New prefix input by Adrian Webb @ proAV'
 
 branding:
   icon: 'tag'
@@ -35,6 +35,10 @@ inputs:
     description: 'Format date in posix shell'
     required: false
     default: '%Y.%V'
+  prefix:
+    description: 'Optional prefix for the version number'
+    required: false
+    default: '0'
 
 outputs:
   release:
@@ -51,3 +55,4 @@ runs:
     - ${{ inputs.pre }}
     - ${{ inputs.release }}
     - ${{ inputs.date_format }}
+    - ${{ inputs.prefix }}

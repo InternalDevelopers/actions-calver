@@ -17,6 +17,8 @@ DRAFT="${4}"
 PRE="${5}"
 CREATE_RELEASE="${6}"
 DATE_FORMAT="${7}"
+# AW: Added input for optional prefix to the version number
+PREFIX="${8}"
 
 # Security
 git config --global --add safe.directory /github/workspace
@@ -24,7 +26,15 @@ git config --global --add safe.directory /github/workspace
 # Fetch git tags
 git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-NEXT_RELEASE=$(date "+${DATE_FORMAT}")
+# AW: Added input for optional prefix to the version number
+if [ "${PREFIX}" = "0" ]; then
+  PREFIX=""
+fi
+
+# AW: Build up NEXT_RELEASE from new input for optional prefix
+NEXT_RELEASE_DATE=$(date "+${DATE_FORMAT}")
+NEXT_RELEASE="${PREFIX}${NEXT_RELEASE_DATE}"
+NEXT_RELEASE_NAME="${NAME} ${NEXT_RELEASE}"
 
 # ColemanB - Script looks for tags meeting requirements
 # and then looks up hash.
@@ -62,7 +72,7 @@ if [ "${CREATE_RELEASE}" = "true" ] || [ "${CREATE_RELEASE}" = true ]; then
   JSON_STRING=$(jq -n \
     --arg tn "$NEXT_RELEASE" \
     --arg tc "$BRANCH" \
-    --arg n "$NEXT_RELEASE" \
+    --arg n "$NEXT_RELEASE_NAME" \
     --arg b "$MESSAGE" \
     --argjson d "$DRAFT" \
     --argjson p "$PRE" \
@@ -72,4 +82,4 @@ if [ "${CREATE_RELEASE}" = "true" ] || [ "${CREATE_RELEASE}" = true ]; then
   echo "${OUTPUT}" | jq
 fi
 
-echo "release=${NEXT_RELEASE}" >>$GITHUB_OUTPUT
+echo "release=${NEXT_RELEASE_NAME} (Tag)" >>$GITHUB_OUTPUT
