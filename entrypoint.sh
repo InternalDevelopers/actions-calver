@@ -38,7 +38,7 @@ NEXT_RELEASE_NAME="${NAME} ${NEXT_RELEASE}"
 
 # ColemanB - Script looks for tags meeting requirements
 # and then looks up hash.
-LAST_RELEASE=$(git tag --sort=v:refname | grep "^20[^\-]*$" | tail -n 1)
+LAST_RELEASE=$(git tag --sort=v:refname | grep '^v20[^\-]*$' | tail -n 1)
 echo "Last release : ${LAST_RELEASE}"
 
 LAST_HASH="$(git show-ref -s "${LAST_RELEASE}")"
