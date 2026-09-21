@@ -45,7 +45,7 @@ The new release name.
 ```yaml
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
         
       - name: Calver Release
         uses: StephaneBour/actions-calver@master
