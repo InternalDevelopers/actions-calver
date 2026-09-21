@@ -1,6 +1,4 @@
-# Calver Releaser for Github Actions
-
-Create calver release (YYYY.VV)
+# Calver Releaser for Githactions/checkout@v7calver release (YYYY.VV)
 
 ## Inputs
 
@@ -45,7 +43,7 @@ The new release name.
 ```yaml
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
         
       - name: Calver Release
         uses: StephaneBour/actions-calver@master
